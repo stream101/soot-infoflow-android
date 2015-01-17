@@ -112,7 +112,7 @@ public class Test {
 	
 	private static CallgraphAlgorithm callgraphAlgorithm = CallgraphAlgorithm.AutomaticSelection;
 	
-	private static boolean DEBUG = false;
+	private static boolean DEBUG = true;
 
 	private static IIPCManager ipcManager = null;
 	public static void setIPCManager(IIPCManager ipcManager)
@@ -184,6 +184,7 @@ public class Test {
 		for (final String fileName : apkFiles) {
 			final String fullFilePath;
 			
+			 System.out.println("Analyzing file " + fileName + "...");
 			// Directory handling
 			if (apkFiles.size() > 1) {
 				if (apkFile.isDirectory())
@@ -196,7 +197,7 @@ public class Test {
 					continue;
 				flagFile.createNewFile();
 			}
-			else
+			else 
 				fullFilePath = fileName;
 
 			// Run the analysis
@@ -506,6 +507,7 @@ public class Test {
 			
 			if (DEBUG) {
 				app.printEntrypoints();
+				app.printCallbacks(); //by xinxin
 				app.printSinks();
 				app.printSources();
 			}

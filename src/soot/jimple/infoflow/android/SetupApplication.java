@@ -76,6 +76,7 @@ public class SetupApplication {
 	private CallgraphAlgorithm callgraphAlgorithm = CallgraphAlgorithm.AutomaticSelection;
 
 	private Set<String> entrypoints = null;
+	private Set<String> callbacks = new HashSet<String>();
 	
 	private Map<Integer, LayoutControl> layoutControls;
 	private List<ARSCFileParser.ResPackage> resourcePackages = null;
@@ -179,6 +180,10 @@ public class SetupApplication {
 	public Set<String> getEntrypointClasses() {
 		return entrypoints;
 	}
+	
+	public Set<String> getCallbacks() {
+		return callbacks;
+	}
 
 	/**
 	 * Prints list of classes containing entry points to stdout
@@ -192,6 +197,18 @@ public class SetupApplication {
 				System.out.println("\t" + className);
 			System.out.println("End of Entrypoints");
 		}
+	}
+
+	public void printCallbacks() {
+		if (this.callbacks == null)
+			System.out.println("No callback function");
+		else {
+			System.out.println("App callbacks:");
+			for (String methodName : callbacks)
+				System.out.println("\t" + methodName);
+			System.out.println("End of callbacks");
+		}
+
 	}
 
 	/**
@@ -379,6 +396,8 @@ public class SetupApplication {
 										+ lcentry.getKey().getName());
 								continue;
 							}
+							//by xinxin
+							callbacks.add(methodName);
 							methods.add(new AndroidMethod(callbackMethod));
 						}
 				}
